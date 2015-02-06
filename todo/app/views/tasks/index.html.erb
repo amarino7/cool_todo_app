@@ -9,6 +9,7 @@
 		</div>
 		<div>Created at: <%=task.created_at%>
 		</div>
+		<%= button_to "Delete", task, method: :delete %>
 	</li>
 	<% end %>
 </ul>
