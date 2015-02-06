@@ -1,0 +1,14 @@
+<h1>tasks</h1>
+
+<ul>
+	<% @tasks.each do |task| %>
+	<li>
+		<div>Content: <%=task.content%>
+		</div>
+		<div>Complete: <%=task.complete%>
+		</div>
+		<div>Created at: <%=task.created_at%>
+		</div>
+	</li>
+	<% end %>
+</ul>
