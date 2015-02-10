@@ -3,7 +3,12 @@ class TasksController < ApplicationController
 
 	def index
 		@tasks = @user.tasks.all
-		render :index
+		# render :index
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @tasks }
+		end
 	end
 
 	def new
@@ -15,12 +20,21 @@ class TasksController < ApplicationController
 		new_task = params.require(:task).permit(:content, :complete)
 		task = @user.tasks.create(new_task)
 		redirect_to "/users/#{@user.id}/tasks/#{task.id}"
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @tasks }
+		end
+
 	end
 
 	def show
 		task_id = params[:task_id]
 		@meow_mix = @user.tasks.find(task_id)
-		render :show
+		respond_to do |format|
+			format.html
+			format.json { render json: @tasks }
+		end
 	end
 
 	def edit
@@ -34,14 +48,23 @@ class TasksController < ApplicationController
 		task = @user.tasks.find(task_id)
 		updated_attrs = params.require(:task).permit(:content, :complete)
 		task.update_attributes(updated_attrs)
-		redirect_to task_path
+		# redirect_to task_path
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @tasks }
+		end
 	end
 
 	def destroy
 		id = params[:task_id]
 		task = @user.tasks.find(id)
 		task.destroy
-		redirect_to tasks_path
+		# redirect_to tasks_path
+		respond_to do |format|
+			format.html
+			format.json { render json: @tasks }
+		end
 	end
 
 private
