@@ -1,0 +1,8 @@
+<h1>Edit page</h1>
+<%= form_for @task do |f| %>
+
+	<%= f.text_field :content %>
+	<%= f.check_box :complete %>
+	<%= f.submit "edit task" %>
+
+<% end %>
