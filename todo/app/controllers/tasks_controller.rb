@@ -18,14 +18,11 @@ class TasksController < ApplicationController
 
 	def create
 		new_task = params.require(:task).permit(:content, :complete)
-		task = @user.tasks.create(new_task)
-		redirect_to "/users/#{@user.id}/tasks/#{task.id}"
-
+		@task = @user.tasks.create(new_task)
 		respond_to do |format|
-			format.html
-			format.json { render json: @tasks }
+			format.html { redirect_to "/users/#{@user.id}/tasks/#{task.id}" }
+			format.json { render json: @task }
 		end
-
 	end
 
 	def show
@@ -60,7 +57,7 @@ class TasksController < ApplicationController
 		id = params[:task_id]
 		task = @user.tasks.find(id)
 		task.destroy
-		# redirect_to tasks_path
+
 		respond_to do |format|
 			format.html
 			format.json { render json: @tasks }
