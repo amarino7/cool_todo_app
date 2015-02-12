@@ -1,12 +1,13 @@
 class TasksController < ApplicationController
-	before_action :get_user
+	before_action :get_user 
+	before_action :logged_in?, :authorized_user?, only: [:index, :new, :show, :edit]
 
 	def index
 		@tasks = @user.tasks.all
 		# render :index
 
 		respond_to do |format|
-			format.html
+			format.html { render :index}
 			format.json { render json: @tasks }
 		end
 	end
